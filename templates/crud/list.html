@@ -1,0 +1,138 @@
+{% include 'layout/header_dashboard.html' %}
+
+<body class="bg-body-primary">
+    {% include 'layout/nav.html' %}
+    
+ <div class="container-fluid bg-body-secondary">
+    <div class="card">
+      <!-- Botón Agregar y Editar -->
+      <div class="card-header d-flex justify-content-start align-items-center gap-2 flex-wrap">
+        <h5 class="mb-0 me-3">
+          <i class="fas fa-database me-2"></i>Pacientes registrados
+        </h5>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+          <i class="fas fa-plus"></i> Agregar Paciente
+        </button>
+      </div>
+
+
+      <!-- Tabla de datos -->
+      <details class="mb-4" open>
+        <summary class="h6 text-primary"><i class="fas fa-table me-2"></i>Ver tabla de datos</summary>
+        <div class="mt-3 table-responsive">
+          <table id="tablaDatos" class="table table-striped table-sm">
+
+            <thead>
+              <tr>
+                <th>ID Paciente</th>
+                <th>Edad</th>
+                <th>Género</th>
+                <th>País</th>
+                <th>Año</th>
+                <th>Riesgo Genético</th>
+                <th>Contaminación en el aire</th>
+                <th>Consumo de alcohol</th>
+                <th>Consumo de tabaco</th>
+                <th>Nivel de Obesidad</th>
+                <th>Tipo de Cáncer</th>
+                <th>Etapa</th>
+                <th>Costo USD</th>
+                <th>Años de Supervivencia</th>
+                <th>Puntaje Severidad</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Modal Agregar -->
+  <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <form id="formAgregar" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar Paciente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body row g-3">
+          <div class="col-md-4"><label>Edad:</label><input name="age" type="number" class="form-control" required></div>
+          <div class="col-md-4"><label>Género:</label><select name="gender" id="addGenero" class="form-select" required></select></div>
+          <div class="col-md-4"><label>País:</label><select name="country" id="addPais" class="form-select" required></select></div>
+          <div class="col-md-4"><label>Año:</label><select name="year" id="addAnio" class="form-select" required></select></div>
+          <div class="col-md-4"><label>Riesgo Genético:</label><input name="genetic_risk" type="number" class="form-control" required></div>
+          <div class="col-md-4"><label>Contaminación Aire:</label><input name="air_pollution" type="number" class="form-control" required></div>
+          <div class="col-md-4"><label>Consumo Alcohol:</label><input name="alcohol_use" type="number" class="form-control" required></div>
+          <div class="col-md-4"><label>Consumo Tabaco:</label><input name="smoking" type="number" class="form-control" required></div>
+          <div class="col-md-4"><label>Obesidad:</label><input name="obesity_level" type="number" class="form-control" required></div>
+          <div class="col-md-4"><label>Tipo de Cáncer:</label><select name="cancer_type" id="addTipoCancer" class="form-select" required></select></div>
+          <div class="col-md-4"><label>Etapa:</label><input name="cancer_stage" type="text" class="form-control" required></div>
+          <div class="col-md-4"><label>Costo Tratamiento USD:</label><input name="treatment_cost" type="number" class="form-control" required></div>
+          <div class="col-md-4"><label>Años Supervivencia:</label><input name="survival_years" type="number" class="form-control" required></div>
+          <div class="col-md-4"><label>Puntaje Severidad:</label><input name="target_severity" type="number" class="form-control" required></div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Guardar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Editar -->
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <form id="formEditar" class="modal-content">
+      <div class="modal-header bg-warning text-dark">
+        <h5 class="modal-title" id="modalEditarLabel">Editar Paciente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body row g-3">
+        <!-- Campo oculto para el ID -->
+        <input type="hidden" id="editarId" name="id">
+
+        <div class="col-md-4"><label for="editarAge">Edad:</label><input id="editarAge" name="age" type="number" class="form-control" required></div>
+        <div class="col-md-4"><label for="editarGenero">Género:</label><select id="editarGenero" name="gender" class="form-select" required></select></div>
+        <div class="col-md-4"><label for="editarPais">País:</label><select id="editarPais" name="country_region" class="form-select" required></select></div>
+        <div class="col-md-4"><label for="editarAnio">Año:</label><select id="editarAnio" name="year" class="form-select" required></select></div>
+        <div class="col-md-4"><label for="editarGenetic">Riesgo Genético:</label><input id="editarGenetic" name="genetic_risk" type="number" class="form-control" required></div>
+        <div class="col-md-4"><label for="editarPollution">Contaminación Aire:</label><input id="editarPollution" name="air_pollution" type="number" class="form-control" required></div>
+        <div class="col-md-4"><label for="editarAlcohol">Consumo Alcohol:</label><input id="editarAlcohol" name="alcohol_use" type="number" class="form-control" required></div>
+        <div class="col-md-4"><label for="editarSmoking">Consumo Tabaco:</label><input id="editarSmoking" name="smoking" type="number" class="form-control" required></div>
+        <div class="col-md-4"><label for="editarObesity">Obesidad:</label><input id="editarObesity" name="obesity_level" type="number" class="form-control" required></div>
+        <div class="col-md-4"><label for="editarTipoCancer">Tipo de Cáncer:</label><select id="editarTipoCancer" name="cancer_type" class="form-select" required></select></div>
+        <div class="col-md-4"><label for="editarStage">Etapa:</label><input id="editarStage" name="cancer_stage" type="text" class="form-control" required></div>
+        <div class="col-md-4"><label for="editarCost">Costo Tratamiento USD:</label><input id="editarCost" name="treatment_cost_usd" type="number" class="form-control" required></div>
+        <div class="col-md-4"><label for="editarSurvival">Años Supervivencia:</label><input id="editarSurvival" name="survival_years" type="number" class="form-control" required></div>
+        <div class="col-md-4"><label for="editarSeverity">Puntaje Severidad:</label><input id="editarSeverity" name="target_severity_score" type="number" class="form-control" required></div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-warning">Actualizar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <!-- Toast Notificación -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="toastNotificacion" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="toastMensaje">Mensaje del sistema</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+{% include 'layout/mensajes.html' %}
+<!-- Scripts -->
+         {% include 'layout/scripts.html' %}
+         <script src="{{ url_for('static', filename='js/crudcancer.js') }}?v=3.0.0"></script>
+ 
+
+</body>
+{% include 'layout/footer_dashboard.html' %}
+
+</html>

@@ -1,0 +1,87 @@
+<!-- Botón Agregar Paciente -->
+<div class="mb-3">
+  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+    <i class="fas fa-plus-circle me-1"></i> Agregar Paciente
+  </button>
+</div>
+
+<!-- Modal Editar -->
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <form id="formEditar">
+        <div class="modal-header bg-warning text-dark">
+          <h5 class="modal-title" id="modalEditarLabel">Editar Paciente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+
+        <div class="modal-body row g-3">
+          <!-- Campo oculto para el ID -->
+          <input type="hidden" id="editarId" name="id">
+
+          <div class="col-md-4">
+            <label for="editarAge" class="form-label">Edad</label>
+            <input type="number" id="editarAge" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label for="editarGenero" class="form-label">Género</label>
+            <select id="editarGenero" class="form-select" required></select>
+          </div>
+          <div class="col-md-4">
+            <label for="editarPais" class="form-label">País / Región</label>
+            <select id="editarPais" class="form-select" required></select>
+          </div>
+          <div class="col-md-4">
+            <label for="editarAnio" class="form-label">Año del Diagnóstico</label>
+            <select id="editarAnio" class="form-select" required></select>
+          </div>
+          <div class="col-md-4">
+            <label for="editarGenetic" class="form-label">Riesgo Genético</label>
+            <input type="number" step="0.01" id="editarGenetic" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label for="editarPollution" class="form-label">Contaminación del Aire</label>
+            <input type="number" step="0.01" id="editarPollution" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label for="editarAlcohol" class="form-label">Consumo de Alcohol</label>
+            <input type="number" step="0.01" id="editarAlcohol" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label for="editarSmoking" class="form-label">Consumo de Tabaco</label>
+            <input type="number" step="0.01" id="editarSmoking" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label for="editarObesity" class="form-label">Nivel de Obesidad</label>
+            <input type="number" step="0.01" id="editarObesity" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label for="editarTipoCancer" class="form-label">Tipo de Cáncer</label>
+            <select id="editarTipoCancer" class="form-select" required></select>
+          </div>
+          <div class="col-md-4">
+            <label for="editarStage" class="form-label">Etapa del Cáncer</label>
+            <input type="text" id="editarStage" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label for="editarCost" class="form-label">Costo Tratamiento (USD)</label>
+            <input type="number" step="0.01" id="editarCost" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label for="editarSurvival" class="form-label">Años de Supervivencia</label>
+            <input type="number" step="0.01" id="editarSurvival" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label for="editarSeverity" class="form-label">Puntaje de Severidad</label>
+            <input type="number" step="0.01" id="editarSeverity" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-warning">Actualizar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

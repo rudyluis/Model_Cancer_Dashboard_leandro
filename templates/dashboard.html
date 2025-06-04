@@ -1,0 +1,136 @@
+{% include 'layout/header_dashboard.html' %}
+<body>
+  <!-- Navbar -->
+<!-- Navbar -->
+  <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-sm">
+    <div class="container-fluid justify-content-between">
+      <h1 class="navbar-brand mb-0 h3">Dashboard de Casos de Cáncer</h1>
+      <div class="d-flex align-items-center">
+        <button id="toggleTheme" class="btn btn-outline-warning me-2">
+          <i class="fas fa-moon"></i> Modo Oscuro
+        </button>
+        <a href="/listcancer" class="btn btn-outline-light me-2">
+          <i class="fas fa-database"></i> Ir al CRUD
+        </a>
+        <a href="/logout" class="btn btn-outline-danger">
+          <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+        </a>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container-fluid">
+    <div class="card">
+      <!-- Filtros -->
+      <details class="mb-4">
+        <summary class="h5 text-primary">🎛️ Filtros de visualización</summary>
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <label for="filterPais" class="form-label">Filtrar por país:</label>
+            <select id="filterPais" class="form-select"><option value="">Todos</option></select>
+          </div>
+          <div class="col-md-3">
+            <label for="filterGenero" class="form-label">Filtrar por género:</label>
+            <select id="filterGenero" class="form-select"><option value="">Todos</option></select>
+          </div>
+          <div class="col-md-3">
+            <label for="filterAnio" class="form-label">Filtrar por año:</label>
+            <select id="filterAnio" class="form-select"><option value="">Todos</option></select>
+          </div>
+          <div class="col-md-3">
+            <label for="filterTipoCancer" class="form-label">Filtrar por tipo de cáncer:</label>
+            <select id="filterTipoCancer" class="form-select"><option value="">Todos</option></select>
+          </div>
+        </div>
+      </details>
+
+      <!-- Tabla -->
+      <details class="mb-4" open>
+        <summary class="h5 text-primary">📊 Ver tabla de datos</summary>
+        <div class="mt-3 table-responsive">
+          <table id="tablaDatos" class="table table-striped" style="width:100%">
+            <thead>
+              <tr>
+                <th>ID Paciente</th>
+                <th>Edad</th>
+                <th>Género</th>
+                <th>País</th>
+                <th>Año</th>
+                <th>Riesgo Genético</th>
+                <th>Contaminación en el aire</th>
+                <th>Consumo de alcohol</th>
+                <th>Consumo de tabaco</th>
+                <th>Nivel de Obesidad</th>
+                <th>Tipo de Cáncer</th>
+                <th>Etapa del Cáncer</th>
+                <th>Costo del tratamiento (USD)</th>
+                <th>Años de Supervivencia</th>
+                <th>Puntaje de Severidad</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </details>
+
+      <!-- Gráficos -->
+      <ul class="nav nav-tabs mb-3" id="graficoTabs" role="tablist">
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab1" type="button">🌍 Países y Clasificación</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab2" type="button">☣️ Causantes</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab3" type="button">💰 Costos</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab4" type="button">⏳ Severidad y Tiempo</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab5" type="button">📊 Otras Clasificaciones</button></li>
+      </ul>
+
+      <div class="tab-content">
+        <!-- 🌍 Países y Clasificación -->
+        <div class="tab-pane fade show active" id="tab1">
+          <div class="row">
+            <div class="col-md-6"><canvas id="casosPorPais"></canvas></div>
+            <div class="col-md-6"><canvas id="casosPorTipoCancer"></canvas></div>
+          </div>
+        </div>
+
+        <!-- ☣️ Causantes -->
+        <div class="tab-pane fade" id="tab2">
+          <div class="row">
+            <div class="col-md-6"><canvas id="graficoFactorAlcohol"></canvas></div>
+            <div class="col-md-6"><canvas id="graficoFactorTabaco"></canvas></div>
+            <div class="col-md-6"><canvas id="graficoFactorObesidad"></canvas></div>
+            <div class="col-md-6"><canvas id="graficoFactorContaminacion"></canvas></div>
+            <div class="col-md-8 mx-auto"><canvas id="graficoRadarFactoresRiesgo"></canvas></div>
+          </div>
+        </div>
+
+        <!-- 💰 Costos -->
+        <div class="tab-pane fade" id="tab3">
+          <div class="row">
+            <div class="col-md-6"><canvas id="graficoCostosPorTipo"></canvas></div>
+            <div class="col-md-6"><canvas id="graficoCostosPorEtapa"></canvas></div>
+          </div>
+        </div>
+
+        <!-- ⏳ Severidad y Tiempo -->
+        <div class="tab-pane fade" id="tab4">
+          <div class="row"><div class="col-12"><canvas id="graficoSeveridadSobrevida"></canvas></div></div>
+        </div>
+
+        <!-- 📊 Edad, Severidad y Género -->
+        <div class="tab-pane fade" id="tab5">
+          <div class="row">
+            <div class="col-md-4"><canvas id="graficoDistribucionEdad"></canvas></div>
+            <div class="col-md-4"><canvas id="graficoDistribucionGenero"></canvas></div>
+            <div class="col-md-4"><canvas id="graficoDistribucionSeveridad"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- Scripts -->
+         {% include 'layout/scripts.html' %}
+         <script src="{{ url_for('static', filename='js/dashboard.js') }}?v=3.0.0"></script>
+    
+ </body>
+{% include 'layout/footer_dashboard.html' %}
+</html>

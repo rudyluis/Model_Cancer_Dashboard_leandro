@@ -1,0 +1,161 @@
+/* ---------- MODO CLARO ---------- */
+html[data-bs-theme="light"] {
+  --fondo-base: #f4f9f4;
+  --texto-base: #333;
+  --primario: #00796B;
+  --primario-claro: #B2DFDB;
+  --borde: #B2DFDB;
+  --fondo-tarjeta: #ffffff;
+  --hover: #F1F8E9;
+}
+
+/* ---------- MODO OSCURO ---------- */
+html[data-bs-theme="dark"] {
+  --fondo-base: #1e1e1e;
+  --texto-base: #e0e0e0;
+  --primario: #80CBC4;
+  --primario-claro: #004D40;
+  --borde: #37474F;
+  --fondo-tarjeta: #2c2c2c;
+  --hover: #263238;
+}
+
+/* ---------- ESTILOS COMUNES ---------- */
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  background-color: var(--fondo-base);
+  color: var(--texto-base);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, summary {
+  font-weight: 600;
+  color: var(--primario);
+}
+
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: white !important;
+  display: flex;
+  align-items: center;
+}
+
+.card, .chart-box, .stats-card {
+  border-radius: 1rem;
+  background-color: var(--fondo-tarjeta);
+  box-shadow: 0 4px 12px rgba(0, 121, 107, 0.1);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover, .chart-box:hover {
+  transform: translateY(-3px);
+}
+
+.stats-card i {
+  font-size: 2rem;
+  color: var(--primario);
+  margin-right: 1rem;
+}
+.stats-card .metric {
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--primario);
+}
+.stats-card .variation {
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+}
+.stats-card .variation.positive {
+  color: #4CAF50;
+}
+.stats-card .variation.negative {
+  color: #F44336;
+}
+
+.table, .form-select {
+  border-radius: 0.5rem;
+}
+
+table.dataTable {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: var(--fondo-tarjeta);
+  box-shadow: 0 0 8px rgba(0, 150, 136, 0.1);
+}
+table.dataTable thead {
+  background-color: var(--primario-claro);
+  color: white;
+}
+table.dataTable tbody tr:hover {
+  background-color: var(--hover);
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  border-radius: 0.5rem;
+}
+
+.nav-tabs .nav-link {
+  border-radius: 0.5rem 0.5rem 0 0;
+  font-weight: 500;
+  color: var(--primario);
+}
+.nav-tabs .nav-link.active {
+  background-color: var(--primario-claro);
+  color: white;
+}
+
+/* Theme Toggle */
+#toggleTheme {
+  font-size: 13px;
+  border-color: var(--primario);
+  color: var(--primario);
+}
+#toggleTheme:hover {
+  background-color: var(--primario);
+  color: white;
+}
+
+/* Filters Section */
+details summary {
+  font-weight: bold;
+  padding: 10px 15px;
+  background-color: var(--primario-claro);
+  border: 1px solid var(--borde);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+details[open] summary {
+  background-color: var(--borde);
+}
+details {
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 121, 107, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+/* Charts */
+canvas {
+  max-width: 100%;
+  display: block !important;
+  height: 400px !important;
+}
+
+.card{
+  width: 100%;
+}
+
+/* CSS compacto para formularios en modales */
+.small-form label {
+  font-size: 0.85rem;
+}
+
+.small-form input,
+.small-form select {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.5rem;
+  height: auto;
+}
