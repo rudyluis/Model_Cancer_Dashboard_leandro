@@ -136,8 +136,8 @@ def list_cancer():
 
 @app.route('/api/list_cancer_records')
 def api_list_cancer_records():
-    data = db_session.query(CancerRecord).limit(100)
-    print(data)
+    data = db_session.query(CancerRecord).limit(20000)
+    ##print(data)
     registros = []
     for r in data:
         registros.append({
@@ -241,4 +241,6 @@ def actualizar_cancer_record(id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    ##app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Render asigna el puerto dinámicamente
+    app.run(host='0.0.0.0', port=port)

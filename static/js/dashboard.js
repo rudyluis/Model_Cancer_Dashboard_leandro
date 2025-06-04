@@ -29,6 +29,7 @@ $(document).ready(function () {
     method: "GET",
     dataType: "json",
     success: function (data) {
+      console.log(data)
       allData = data;
       filteredData = allData;
       popularFiltros();
@@ -62,8 +63,8 @@ function popularFiltros() {
     valores.forEach(v => select.append(`<option value="${v}">${v}</option>`));
     if (valores.includes(valorActual)) select.val(valorActual);
   };
-
-  actualizarCombo('#filterPais', unique(filtrado, 'Country'));  // ⬅️ CORREGIDO
+ console.log(unique(filtrado, 'Country'));
+  actualizarCombo('#filterPais', unique(filtrado, 'Country_Region'));  // ⬅️ CORREGIDO
   actualizarCombo('#filterGenero', unique(filtrado, 'Gender'));
   actualizarCombo('#filterAnio', unique(filtrado, 'Year'));
   actualizarCombo('#filterTipoCancer', unique(filtrado, 'Cancer_Type'));
@@ -82,7 +83,7 @@ function aplicarFiltrosYGraficos() {
   const tipoCancer = $('#filterTipoCancer').val();
 
   filteredData = allData.filter(d =>
-    (!pais || d.Country === pais) &&  // ⬅️ CORREGIDO
+    (!pais || d.Country_Region === pais) &&  // ⬅️ CORREGIDO
     (!genero || d.Gender === genero) &&
     (!anio || d.Year == anio) &&
     (!tipoCancer || d.Cancer_Type === tipoCancer)
@@ -97,10 +98,10 @@ function cargarTabla(data) {
   tabla.clear().destroy();
 
   const cuerpo = data.map(d => [
-    d.Patient_ID,
+    d.id,   /// este iguala a el id de la base
     parseInt(d.Age),
     d.Gender,
-    d.Country,
+    d.Country_Region,  /// este iguala a el id de la base
     parseInt(d.Year),
     parseFloat(d.Genetic_Risk),
     parseFloat(d.Air_Pollution),
@@ -150,6 +151,9 @@ function cargarTabla(data) {
 }
 
 function renderGraficos(data) {
+  console.log("RENDER GRAFICOS");
+  console.log(data);
+
   // Destruir gráficos existentes
   const chartIds = [
     'casosPorPais',
@@ -191,7 +195,7 @@ function renderGraficos(data) {
 
   // Procesar datos
   data.forEach(d => {
-    const pais = d.Country;
+    const pais = d.Country_Region;  //esto tambien se modifico
     const tipo = d.Cancer_Type;
     const anio = d.Year;
     const etapa = d.Cancer_Stage;
@@ -232,7 +236,8 @@ function renderGraficos(data) {
     factoresRiesgo.Air_Pollution / total,
     factoresRiesgo.Genetic_Risk / total
   ];
-
+  console.log("CASOS PAIS");
+  console.log(casosPais);
   // Gráfico de barras - casos por país
   new Chart(document.getElementById('casosPorPais'), {
     type: 'bar',
@@ -259,8 +264,8 @@ function renderGraficos(data) {
       },
       scales: {
         y: {
-          beginAtZero: true,
-          min: 4700
+          beginAtZero: true
+          //min: 4700  esto no es necesario
         }
       }
     }
@@ -306,7 +311,7 @@ function renderGraficos(data) {
       scales: {
         y: {
           beginAtZero: false,
-          min: 5800,
+          //min: 5800, no es necesario
           title: {
             display: true,
             text: 'Cantidad de casos'

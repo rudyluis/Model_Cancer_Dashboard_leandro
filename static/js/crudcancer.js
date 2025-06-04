@@ -13,14 +13,15 @@ function cargarDatos() {
         method: "GET",
         dataType: "json",
         success: function (data) {
+            console.log(data)
             $('#tablaDatos').DataTable().clear().destroy();
             $('#tablaDatos').DataTable({
                 data: data,
                 columns: [
-                    { data: 'Patient_ID' },
+                    { data: 'id' },  ///modificar rlmv
                     { data: 'Age' },
                     { data: 'Gender' },
-                    { data: 'Country' },
+                    { data: 'Country_Region' }, //con este nombre esta en la base
                     { data: 'Year' },
                     { data: 'Genetic_Risk' },
                     { data: 'Air_Pollution' },
@@ -36,8 +37,8 @@ function cargarDatos() {
                         data: null,
                         render: function (data) {
                             return `
-                                <button class="btn btn-warning btn-sm btn-editar" data-id="${data.Patient_ID}">✏️</button>
-                                <button class="btn btn-danger btn-sm btn-eliminar" data-id="${data.Patient_ID}">🗑️</button>
+                                <button class="btn btn-warning btn-sm btn-editar" data-id="${data.id}">✏️</button>
+                                <button class="btn btn-danger btn-sm btn-eliminar" data-id="${data.id}">🗑️</button>
                             `;
                         }
                     }
