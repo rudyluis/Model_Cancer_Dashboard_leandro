@@ -70,10 +70,10 @@ def logout():
     return redirect(url_for('auth'))
 
 #### Creacion y llamada ala BD
-@app.route('/api/list_cancer_records')
+@app.route('/api/list_cancer_data')
 def api_list_cancer():
     print("API LLEGAMOS")
-    records = db_session.query(CancerRecord).all()
+    records = db_session.query(CancerRecord).limit(100)
 
     resultados = []
     for r in records:
@@ -136,7 +136,7 @@ def list_cancer():
 
 @app.route('/api/list_cancer_records')
 def api_list_cancer_records():
-    data = db_session.query(CancerRecord).all()
+    data = db_session.query(CancerRecord).limit(100)
     print(data)
     registros = []
     for r in data:
@@ -175,7 +175,7 @@ def obtener_opciones():
         "tipos_cancer": sorted([t[0] for t in tipos_cancer if t[0]])
     })
 #### Agregar regist
-@app.route('/add/cancer_record', methods=['POST'])
+@app.route('/add/cancer_data', methods=['POST'])
 def crear_cancer_record():
     data = request.json
     nuevo = CancerRecord(
@@ -199,7 +199,7 @@ def crear_cancer_record():
     return jsonify({"mensaje": "Registro de cáncer agregado correctamente"})
 
 
-@app.route('/del/cancer_record/<int:id>', methods=['DELETE'])
+@app.route('/del/cancer_data/<int:id>', methods=['DELETE'])
 def eliminar_cancer_record(id):
     registro = db_session.query(CancerRecord).get(id)
     if registro:
@@ -210,7 +210,7 @@ def eliminar_cancer_record(id):
 
 
 
-@app.route('/upd/cancer_record/<int:id>', methods=['PUT'])
+@app.route('/upd/cancer_data/<int:id>', methods=['PUT'])
 def actualizar_cancer_record(id):
     data = request.json
     registro = db_session.query(CancerRecord).get(id)
